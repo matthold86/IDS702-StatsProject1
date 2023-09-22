@@ -1,0 +1,140 @@
+# IDS 702 Data Modeling and Representation Group Proposal
+### Matthew Holden, Katie Hucker, Mark Okello, Yabei Zeng
+
+
+### Introduction:
+We have three different options for our project. We will describe the three data sets and two questions for each. They are in NO order of preference. We would like your feedback on what would make an interesting, in-depth, statistical project. 
+
+```{r,warning=FALSE, message=FALSE}
+#Loading in Packages 
+library(tidyverse)
+```
+
+### Gulf of Mexico Marine Data Topic
+
+**About the dataset**: The data was collected from National Centers for Environmental Information(NOAA), Global Marine Observations in 10-degree Bins derived from the International Comprehensive Ocean-Atmosphere Data Set (ICOADS). The data was collected by 282 stations from 2022-01-01 to 2022-01-31.
+
+#### 1st Idea: 
+**Background:** 
+The Gulf of Mexico is a critical region for maritime transportation, oil and gas extraction, and fisheries. Understanding the marine conditions in this area is crucial for these industries and for environmental conservation. This question aims to understand the relationship between atmospheric conditions and sea conditions, which could be important for predicting wave height, a key factor for navigation and offshore operations.
+
+**Research Question:** How does the variation in sea level pressure and sea surface temperature in different regions of the Gulf of Mexico correlate with wave height over time? 
+
+**Explicit Outcome Variable:** Wave Height Over Time
+
+#### 2nd Idea: 
+
+**Background:**
+Elevated Sea Surface Temperatures (SST) are known to cause coral bleaching, a phenomenon where corals expel the symbiotic algae living in their tissues, leading to a white appearance. This can be detrimental to the coral's health. Additionally, wave height can influence sediment re-suspension, which can smother corals or affect their ability to feed. By analyzing the SST and wave height data, one can infer potential stressors on coral reefs in the Gulf of Mexico. However, we might need more info/data on the coral reefs in this area.
+
+**Research Question:** How do the sea level temperatures and wave height influence the health and distribution of coral reefs in the Gulf of Mexico?
+
+**Explicit Outcome Variables:** Ordinal or Binary Categorical Variable for Coral Health (Good/Bad or a scale if we can find it)
+
+```{r}
+#| label: Gulf of Mexico Marine Data
+marine_data<-read.csv('gulf_mexico_marine_data.csv')
+glimpse(marine_data)
+
+```
+
+### Patient Stay In Hospital 
+
+**About the dataset:**
+The dataset was obtained from Hugging Face and shared by Nicoly Barbosa and Gomes da Silva, who are based in Brazil. This suggests that the dataset is likely to be for patients in Brazil. The dataset contains over 500,000 rows. The dataset contains the following information about each patient. 
+
+**Variables:** Available Extra Rooms in Hospital, Department, Ward_Facility_Code, doctor_name, staff_available, patientid, Age (This a range), Gender, Type of Admission, Severity of Illness, health_conditions, Visitors with Patient (Total number of visitors), Insurance (Coverage), Admission_Deposit, Stay (in days).
+
+**Limitations:** The dataset does not provide information about the specific geographic location or region where the hospitals are located. This limits the ability to account for regional variations in healthcare practices, which could influence hospital stay duration.This makes it challenging to assess the reliability and representative nature of the data. We will have to be aware of potential biases due to the source of the data. In addition, lack of certain variables that could be important determinants of hospital stay durations, such as detailed clinical data, patient comorbidities, or specific treatment regimens. We could further investigate for another dataset if this topic is selected.
+
+#### 1st Idea:
+
+We could predict the stay of patient in the hospital using linear regression techniques. This would include analyzing certain predictors looking for signficant factors to a longer or shorter stay. 
+
+**Research Question:** What are the primary factors associated with prolonged hospital stays, considering socioeconomic status, the patient's medical history, discharge disposition (e.g., home care, rehabilitation facility), characteristics of the hospital (e.g., size, location), and characteristics of the attending physician (e.g., experience, specialization)? 
+
+**Explicit Outcome Variable:** Length of Hospital Stay
+
+#### 2nd Idea: 
+
+One of the variables is insurance coverage. We would need to do some background research on medical insurance, however, it would be interesting to see if we could predict whether someone has insurance or not based off their hospital visits.
+
+**Research Question:** How does insurance coverage affect the duration of a patient's stay in the hospital? Are there noticeable differences in stay duration based on factors such as the level of coverage, copayment requirements? 
+
+**Explicit Outcome Variables:** Binary Insurance Coverage
+
+```{r}
+#| label: Healthcare Data Set
+health_care<-read.csv('healthcare_data.csv')
+glimpse(health_care)
+
+```
+
+### Trends in Music 
+
+**About the dataset:**
+This main dataset was found on gigasheet.com. It is combined songs from both Youtube and Spotify. It contains 20,594 rows of data.
+
+**Variables:** Artist, Track,Album,	Album_type,	Danceability,	Energy,	Loudness,	Speechiness,	Acousticness,	Instrumentalness,	Liveness,	Valence,	Tempo,Duration_min,	,Title,	Channel,	Views,	Likes,	Comments,	Licensed,	official_video,	Stream,	EnergyLiveness,	most_played on.
+
+**Limitations:** The dataset is web scraped data, so it is lacking in the reliability area. However, it is supported by its large quantity of data and mixture between different websites. In addition it contains a lot of variables ranging from categorical and continuous. 
+
+
+**How do we plan to combat this?** We have found multiple datasets that we can use to merge on Song Title. We hope these datasets will add variables we can use like playlist genre, song genre, playlist title, etc. We plan to merge these and clean it as requried. Below is an example of a simple merge from another webscraped dataset found on kaggle.com
+
+#### 1st Idea:
+
+We would like to look into if we can predict genre based off all of these musical measures.In addition to all the possible variables, we would specificaly like to look at factors like loudness, speechiness, danceability, and even year.
+
+**Question:** What types of factors for songs are the most crucial in predicting genre? 
+
+**Explicit Outcome Variable:** Categorical Genre
+
+#### 2nd Idea:
+
+We would like to see if there is any correlation between these variables and length of song. It would be interesting to identify if certain variables can lead to longer or shorter songs. This would help artists and listeners know what they are getting into time wise when they pick certain music to listen to. 
+
+**Question:** Can we predict how long a song will be based on multiple song qualities?
+
+**Explicit Outcome Variable:** Length of song (ms)
+
+##### Other notes:
+___
+- After coming up with the datasets and ideas we did find out that other groups had similar         datasets. However, we hope our take on merging multiple datasets to get specific variables of interests to us sets us apart from the crowd. 
+
+- In addition, we would be ineterested in doing popularity or likes as a continuous outcome variable. However we wanted to stick out and have a different take on these datasets, rather than what was done online already.
+
+```{r}
+#| label: Original Music Data Set (includes youtube information)
+spotify_youtube<-read.csv('Copy of Spotify dataset_exported.csv')
+glimpse(spotify_youtube)
+```
+
+```{r}
+#| label: Simple merge done on song track with another dataset from kaggle.com
+merged_spotify<-read.csv('merged_spotify_dataset.csv')
+glimpse(merged_spotify)
+
+```
+
+#### Sources for Datasets
+___
+
+**Gulf Marine Dataset:**
+
+* <https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc:C00606/html>
+* <https://www.ncei.noaa.gov/data/global-marine/doc/marinedoc.pdf>
+
+**Patient Stays Dataset:**
+
+* <https://huggingface.co/datasets/Nicolybgs/healthcare_data/tree/main>
+
+**Music Trends:**
+
+* <https://app.gigasheet.com/spreadsheet/spotify-dataset/b3f749fe_7428_4de0_a9fa_6577c94d2c57?referrerId=https%3A%2F%2Fwww.gigasheet.com%2Fsample-data%2Fspotify-dataset>
+* <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-21/spotify_songs.csv>
+* <https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset>
+* <https://www.kaggle.com/datasets/iamsumat/spotify-top-2000s-mega-dataset>
+* <https://www.kaggle.com/datasets/leonardopena/top-spotify-songs-from-20102019-by-year?select=top10s>
+
+
