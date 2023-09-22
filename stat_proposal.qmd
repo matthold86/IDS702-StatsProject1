@@ -14,6 +14,10 @@ library(tidyverse)
 
 **About the dataset**: The data was collected from National Centers for Environmental Information(NOAA), Global Marine Observations in 10-degree Bins derived from the International Comprehensive Ocean-Atmosphere Data Set (ICOADS). The data was collected by 282 stations from 2022-01-01 to 2022-01-31.
 
+**Variables**: Station Number, Latitude, Longitude, Wind Direction, Wind Speed, Visibility, Sea Surface Temperature, Sea Level Pressure, Dew Point Temperature, Low Cloud Amount/Type, Mid Cloud Amount/Type, High Cloud Amount/Type, Wave Direction/Period/Height, Swell Direction/Period/Height, Night/Day Flag, (see more below).
+
+**Limitations:** This dataset has missing (N/A) data which may restrict options for predictors and the number of observations. Supplemental data may need to be found to support the research questions below.
+
 #### 1st Idea: 
 **Background:** 
 The Gulf of Mexico is a critical region for maritime transportation, oil and gas extraction, and fisheries. Understanding the marine conditions in this area is crucial for these industries and for environmental conservation. This question aims to understand the relationship between atmospheric conditions and sea conditions, which could be important for predicting wave height, a key factor for navigation and offshore operations.
@@ -29,7 +33,7 @@ Elevated Sea Surface Temperatures (SST) are known to cause coral bleaching, a ph
 
 **Research Question:** How do the sea level temperatures and wave height influence the health and distribution of coral reefs in the Gulf of Mexico?
 
-**Explicit Outcome Variables:** Ordinal or Binary Categorical Variable for Coral Health (Good/Bad or a scale if we can find it)
+**Explicit Outcome Variables:** Ordinal or Binary Categorical Variable for Coral Health
 
 ```{r}
 #| label: Gulf of Mexico Marine Data
@@ -49,7 +53,7 @@ The dataset was obtained from Hugging Face and shared by Nicoly Barbosa and Gome
 
 #### 1st Idea:
 
-We could predict the stay of patient in the hospital using linear regression techniques. This would include analyzing certain predictors looking for signficant factors to a longer or shorter stay. 
+Predict the stay of patient in the hospital using linear regression techniques. This would include analyzing certain predictors looking for signficant factors to a longer or shorter stay. 
 
 **Research Question:** What are the primary factors associated with prolonged hospital stays, considering socioeconomic status, the patient's medical history, discharge disposition (e.g., home care, rehabilitation facility), characteristics of the hospital (e.g., size, location), and characteristics of the attending physician (e.g., experience, specialization)? 
 
@@ -73,36 +77,43 @@ glimpse(health_care)
 ### Trends in Music 
 
 **About the dataset:**
-This main dataset was found on gigasheet.com. It is combined songs from both Youtube and Spotify. It contains 20,594 rows of data.
+This main dataset was found on gigasheet.com. It includes 20,594 songs found on both Youtube and Spotify. 
 
 **Variables:** Artist, Track,Album,	Album_type,	Danceability,	Energy,	Loudness,	Speechiness,	Acousticness,	Instrumentalness,	Liveness,	Valence,	Tempo,Duration_min,	,Title,	Channel,	Views,	Likes,	Comments,	Licensed,	official_video,	Stream,	EnergyLiveness,	most_played on.
 
-**Limitations:** The dataset is web scraped data, so it is lacking in the reliability area. However, it is supported by its large quantity of data and mixture between different websites. In addition it contains a lot of variables ranging from categorical and continuous. 
+**Limitations:** The dataset is web scraped data, so it is less reliable than the other two datasets. However, it is supported by its large quantity of data and mixture between different websites. In addition it contains many categorical and continuous variables. 
 
 
-**How do we plan to combat this?** We have found multiple datasets that we can use to merge on Song Title. We hope these datasets will add variables we can use like playlist genre, song genre, playlist title, etc. We plan to merge these and clean it as requried. Below is an example of a simple merge from another webscraped dataset found on kaggle.com
+**How do we plan to combat the limitations?** We have found multiple datasets that we'll be able to merge on Song Title. Merging datasets will add variables such as genre and playlist title, which will be crucial for our research questions. We plan to merge these and clean it as requried. Below is an example of a simple merge from another webscraped dataset found on kaggle.com.
 
 #### 1st Idea:
 
-We would like to look into if we can predict genre based off all of these musical measures.In addition to all the possible variables, we would specificaly like to look at factors like loudness, speechiness, danceability, and even year.
+Predict song genre based off song characteristics. In addition to variables listed in the example dataset below, we would specificaly like to look at factors like loudness, speechiness, danceability, and even year.
 
-**Question:** What types of factors for songs are the most crucial in predicting genre? 
+**Question:** What song characteristics have the most influence in predicting genre? 
 
 **Explicit Outcome Variable:** Categorical Genre
 
 #### 2nd Idea:
 
-We would like to see if there is any correlation between these variables and length of song. It would be interesting to identify if certain variables can lead to longer or shorter songs. This would help artists and listeners know what they are getting into time wise when they pick certain music to listen to. 
+Determine if there's a correlation between song characteristics and length of song. It would be interesting to identify if certain variables lead to longer or shorter songs. This would help artists and listeners know what they are getting into time wise when they pick certain music to listen to. 
 
-**Question:** Can we predict how long a song will be based on multiple song qualities?
+**Question:** Can we predict how long a song will be based on multiple song characteristics?
 
 **Explicit Outcome Variable:** Length of song (ms)
 
-##### Other notes:
-___
-- After coming up with the datasets and ideas we did find out that other groups had similar         datasets. However, we hope our take on merging multiple datasets to get specific variables of interests to us sets us apart from the crowd. 
+#### (Potential) 3rd Idea:
 
-- In addition, we would be ineterested in doing popularity or likes as a continuous outcome variable. However we wanted to stick out and have a different take on these datasets, rather than what was done online already.
+Determine the most influential song characteristics for a popular song in several different genres of music. Different genres uses instruments, lyrics, base, and acoustics differently. It would be interesting to investigate how the weights of each song characteristic changes between genres when predicting song popularity.
+
+**Question:** Can we predict song popularity based on song characteristics? How do the weights of each characteristic change between genres?
+
+**Explicit Outcome Variable:** Song Popularity (streams)
+
+##### Notes on Trends in Music:
+___
+- After finding the music datasets and generating ideas, we found out that other groups had similar interests in using music datasets. However, we hope our take on merging multiple datasets to get specific variables of interests to us sets us apart from other proposals.
+
 
 ```{r}
 #| label: Original Music Data Set (includes youtube information)
